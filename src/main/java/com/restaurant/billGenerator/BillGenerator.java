@@ -4,6 +4,7 @@ import com.restaurant.billGenerator.dao.impl.BillDAOImpl;
 import com.restaurant.billGenerator.dao.impl.MenuItemImpl;
 import com.restaurant.billGenerator.dto.MenuItem;
 import com.restaurant.billGenerator.service.BillService;
+import com.restaurant.billGenerator.service.MenuItemService;
 
 import java.util.*;
 
@@ -17,6 +18,11 @@ public class BillGenerator {
         switch (choice) {
             case "o":
                 System.out.println("Do you want to enter a new category or menu item?(Enter c or m): ");
+                String menuOption = sc.next();
+                if (menuOption.trim().equals("m")) {
+                    MenuItemService menuItemService = new MenuItemService(MenuItemImpl.getInstance());
+                    menuItemService.addMenuItem();
+                }
             case "c":
                 BillService billService = new BillService(BillDAOImpl.getInstance(), MenuItemImpl.getInstance());
                 List<MenuItem> menu = billService.generateMenu();
